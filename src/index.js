@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 import {
   Text,
   View,
-  ViewPropTypes,
   ScrollView,
   Dimensions,
   TouchableOpacity,
@@ -30,7 +29,7 @@ const styles = {
   },
 
   wrapperIOS: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
 
   wrapperAndroid: {
@@ -39,7 +38,7 @@ const styles = {
   },
 
   slide: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
 
   pagination_x: {
@@ -110,11 +109,11 @@ export default class extends Component {
     children: PropTypes.node.isRequired,
     containerStyle: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number,
+      PropTypes.number
     ]),
     style: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number,
+      PropTypes.number
     ]),
     pagingEnabled: PropTypes.bool,
     showsHorizontalScrollIndicator: PropTypes.bool,
@@ -234,7 +233,7 @@ export default class extends Component {
     this.internals = {
       ...this.internals,
       isScrolling: false
-    };
+    }
     return initState
   }
 
@@ -535,7 +534,7 @@ export default class extends Component {
     let button = null
 
     if (this.props.loop ||
-      this.state.index !== this.state.total - 1) {
+      this.state.index !== this.state.total - 1 || this.props.customNextButton) {
       button = this.props.nextButton || <Text style={styles.buttonText}>›</Text>
     }
     if (this.props.customNextButton) {
@@ -626,14 +625,12 @@ export default class extends Component {
    * @return {object} react-dom
    */
   render () {
-    const state = this.state
-    const props = this.props
     const {
       index,
       total,
       width,
       height
-    } = this.state;
+    } = this.state
     const {
       children,
       containerStyle,
@@ -643,8 +640,8 @@ export default class extends Component {
       loadMinimalLoader,
       renderPagination,
       showsButtons,
-      showsPagination,
-    } = this.props;
+      showsPagination
+    } = this.props
     // let dir = state.dir
     // let key = 0
     const loopVal = loop ? 1 : 0
