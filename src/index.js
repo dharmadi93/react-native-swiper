@@ -540,7 +540,7 @@ export default class extends Component {
     }
     if (this.props.customNextButton) {
       return (
-        <TouchableOpacity onPress={() => this.props.customNextButtonFunction()}>
+        <TouchableOpacity onPress={() => (this.state.index === this.state.total - 1) ? this.props.customNextButtonFunction() : this.scrollBy(1)}>
           <View>
             {button}
           </View>
