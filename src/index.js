@@ -138,6 +138,10 @@ export default class extends Component {
     activeDotStyle: PropTypes.object,
     dotColor: PropTypes.string,
     activeDotColor: PropTypes.string,
+    customNextButton: PropTypes.bool,
+    customNextButtonFunction: PropTypes.func,
+    customPrevButton: PropTypes.bool,
+    customPrevButtonFunction: PropTypes.func,
     /**
      * Called when the index has changed because the user swiped.
      */
@@ -167,7 +171,9 @@ export default class extends Component {
     autoplayTimeout: 2.5,
     autoplayDirection: true,
     index: 0,
-    onIndexChanged: () => null
+    onIndexChanged: () => null,
+    customNextButton: false,
+    customPrevButton: false
   }
 
   /**
@@ -532,14 +538,23 @@ export default class extends Component {
       this.state.index !== this.state.total - 1) {
       button = this.props.nextButton || <Text style={styles.buttonText}>›</Text>
     }
-
-    return (
-      <TouchableOpacity onPress={() => button !== null && this.scrollBy(1)}>
-        <View>
-          {button}
-        </View>
-      </TouchableOpacity>
-    )
+    if (this.props.customNextButton) {
+      return (
+        <TouchableOpacity onPress={() => this.props.customNextButtonFunction()}>
+          <View>
+            {button}
+          </View>
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity onPress={() => button !== null && this.scrollBy(1)}>
+          <View>
+            {button}
+          </View>
+        </TouchableOpacity>
+      )
+    }
   }
 
   renderPrevButton = () => {
@@ -548,14 +563,23 @@ export default class extends Component {
     if (this.props.loop || this.state.index !== 0) {
       button = this.props.prevButton || <Text style={styles.buttonText}>‹</Text>
     }
-
-    return (
-      <TouchableOpacity onPress={() => button !== null && this.scrollBy(-1)}>
-        <View>
-          {button}
-        </View>
-      </TouchableOpacity>
-    )
+    if (this.props.customPrevButton) {
+      return (
+        <TouchableOpacity onPress={() => this.props.customPrevButtonFunction()}>
+          <View>
+            {button}
+          </View>
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity onPress={() => button !== null && this.scrollBy(-1)}>
+          <View>
+            {button}
+          </View>
+        </TouchableOpacity>
+      )
+    }
   }
 
   renderButtons = () => {
